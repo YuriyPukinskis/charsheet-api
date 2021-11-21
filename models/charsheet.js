@@ -40,6 +40,10 @@ const charsheetSchema = new mongoose.Schema({
   charisma: {
     type: Number,
     required: true,
+  },
+  owner: {
+    type: String,
+    required: true,
   }
 });
 module.exports = mongoose.model('charsheet', charsheetSchema);

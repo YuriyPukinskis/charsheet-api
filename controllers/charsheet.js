@@ -28,6 +28,7 @@ module.exports.postCharsheet = (req, res, next) => {
     charisma,
   } = req.body;
   const owner = req.user._id;
+  console.log(owner)
 
   Charsheet.create({
     name,
@@ -55,6 +56,7 @@ module.exports.postCharsheet = (req, res, next) => {
         intelligence: charsheet.intelligence,
         wisdom: charsheet.wisdom,
         charisma: charsheet.charisma,
+        owner: charsheet.owner,
       };
       res.send({ data: newCharsheet });
     })
@@ -66,7 +68,28 @@ module.exports.postCharsheet = (req, res, next) => {
     });
 };
 
+module.exports.patchCharsheet = (req, res, next) => {/*req.user._id to req.body._id*/
+  Charsheet.findByIdAndUpdate(req.params.charsheetId, {name: req.body.name, race: req.body.race, profession: req.body.profession, level: req.body.level,
+                              strength: req.body.strength, dexterity: req.body.dexterity, constitution: req.body.constitution, intelligence: req.body.intelligence,
+                              wisdom: req.body.wisdom, charisma: req.body.charisma },
+    { new: true, runValidators: true })
+    .orFail(new NotFoundError('Персонажа нет в базе'))
+    .then((charsheet) => res.send({ data: charsheet }))
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        return (next(new BadDataError('Введены некорректные данные')));
+      }
+      if (err.name === 'CastError') {
+        next(new BadDataError('Переданы некорректные данные'));
+      } else {
+        next(err);
+      }
+      return (true);
+    });
+};
+
 module.exports.deleteCharsheet = (req, res, next) => {
+  console.log(req.params.charsheetId)
   Charsheet.findById(req.params.charsheetId)
     .orFail(new NotFoundError('Персонажа нет в базе'))
     .then((charsheet) => {
