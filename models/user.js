@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'Dat puny hummi hu did not check his battuns',
     minlength: 2,
-    maxlength: 30,
+    maxlength: 50,
   },
   avatar: {
     type: String,
