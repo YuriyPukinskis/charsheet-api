@@ -47,7 +47,7 @@ module.exports.createUser = (req, res, next) => {
         return (next(new SecondRegError('Повторная регистрация на тот же адрес почты')));
       }
       if (err.name === 'ValidationError') {
-        return (next(new BadDataError('Введены некорректные данные')));
+        return (next(new BadDataError('Введены некорректные данные'+err.message)));
       }
       return (next(err));
     });
