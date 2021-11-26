@@ -4,7 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { requestLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3005 } = process.env;
 
 const app = express();
 

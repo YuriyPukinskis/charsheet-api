@@ -3,7 +3,7 @@ const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
 
 const {
-  deleteCharsheet, postCharsheet, getCharsheets, patchCharsheet,
+  deleteCharsheet, postCharsheet, getCharsheets, patchCharsheet, checkSheet
 } = require('../controllers/charsheet');
 
 router.get('/', getCharsheets);
@@ -11,6 +11,7 @@ router.get('/', getCharsheets);
 router.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required(),
+    url: Joi.string().required(),
     race: Joi.string().required(),
     profession: Joi.string().required(),
     level: Joi.number().required(),
@@ -30,6 +31,7 @@ router.patch('/:charsheetId', celebrate({
   }),
   body: Joi.object().keys({
     name: Joi.string().required(),
+    url: Joi.string().required(),
     race: Joi.string().required(),
     profession: Joi.string().required(),
     level: Joi.number().required(),
@@ -48,5 +50,12 @@ router.delete('/:charsheetId', celebrate({
       .required(),
   }),
 }), deleteCharsheet);
+
+router.put('/:charsheetId/likes', celebrate({
+  params: Joi.object().keys({
+    charsheetId: Joi.string().length(24).hex().alphanum()
+      .required(),
+  }),
+}), checkSheet);
 
 module.exports = router;

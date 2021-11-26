@@ -54,7 +54,7 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.patchUserData = (req, res, next) => {
-  User.findByIdAndUpdate(req.user._id, { name: req.body.name, email: req.body.email },
+  User.findByIdAndUpdate(req.user._id, { name: req.body.name, about:req.body.about, email: req.body.email },
     { new: true, runValidators: true })
     .orFail(new NotFoundError('Пользователя нет в базе'))
     .then((user) => res.send({ data: user }))
@@ -71,6 +71,17 @@ module.exports.patchUserData = (req, res, next) => {
         next(err);
       }
       return (true);
+    });
+};
+
+module.exports.patchUserAvatar = (req, res) => {
+  User.findByIdAndUpdate(req.user._id, { avatar: req.body.avatar },
+    { new: true, runValidators: true })
+    .orFail(new Error('NotValidId'))
+    .then((user) => res.send({ data: user }))
+    .catch((err) => {
+      if (err.name === 'CastError') { throw new BadDataError('Переданы некорректные данные'); }
+      if (err.name === 'Error') { throw new NotFoundError('Пользователя нет в базе'); }
     });
 };
 

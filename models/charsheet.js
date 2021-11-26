@@ -5,6 +5,17 @@ const charsheetSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  url: {
+    type: String,
+    required: true,
+    validate: {
+      validator(link) {
+        const RegExp = /^((http|https):\/\/)?(www\.)?([A-Za-z0-9]{1}[A-Za-z0-9-]*\.?)*\.{1}[A-Za-z0-9-]{2,8}(\/([\w#!:.?+=&%@!\-/])*)?/;
+        return RegExp.test(link);
+      },
+      message: 'Ссылка не корректна',
+    },
+  },
   race: {
     type: String,
     required: true,
@@ -44,6 +55,10 @@ const charsheetSchema = new mongoose.Schema({
   owner: {
     type: String,
     required: true,
-  }
+  },
+  likes: {
+    type: Array,
+    default: [],
+  },
 });
 module.exports = mongoose.model('charsheet', charsheetSchema);
