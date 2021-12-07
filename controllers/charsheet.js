@@ -4,7 +4,7 @@ const BadDataError = require('../errors/not-correct-data');
 const NoRightsError = require('../errors/no-rights-err');
 
 module.exports.getCharsheets = (req, res, next) => {
-  Charsheet.find({ owner: req.user._id })
+  Charsheet.find()
     // .select('-owner')
     .then((charsheet) => {
       res.status(200).send(charsheet);
