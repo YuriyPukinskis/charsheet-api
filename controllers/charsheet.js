@@ -54,6 +54,7 @@ module.exports.postCharsheet = (req, res, next) => {
     craftLevel,
     bluffLevel,
     acrobaticsLevel,
+    game,
   } = req.body;
   const owner = req.user._id;
   console.log(owner)
@@ -98,6 +99,7 @@ module.exports.postCharsheet = (req, res, next) => {
     craftLevel,
     bluffLevel,
     acrobaticsLevel,
+    game,
   })
     .then((charsheet) => {
       const newCharsheet = {
@@ -141,6 +143,7 @@ module.exports.postCharsheet = (req, res, next) => {
         craftLevel: charsheet.craftLevel,
         bluffLevel: charsheet.luffLevel,
         acrobaticsLevel: charsheet.acrobaticsLevel,
+        game: charsheet.game,
       };
       res.send({ data: newCharsheet });
     })
@@ -181,7 +184,9 @@ module.exports.patchCharsheet = (req, res, next) => {/*req.user._id to req.body.
                               disableDeviceLevel: req.body.disableDeviceLevel,
                               craftLevel: req.body.craftLevel,
                               bluffLevel: req.body.bluffLevel,
-                              acrobaticsLevel: req.body.acrobaticsLevel },
+                              acrobaticsLevel: req.body.acrobaticsLevel,
+                              game: req.body.game
+                            },
     { new: true, runValidators: true })
     .orFail(new NotFoundError('Персонажа нет в базе'))
     .then((charsheet) => res.send({ data: charsheet }))

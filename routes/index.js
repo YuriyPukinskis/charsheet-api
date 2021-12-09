@@ -9,22 +9,22 @@ const { errorLogger } = require('../middlewares/logger');
 const errorHandler = require('../middlewares/errorHandler');
 
 module.exports = function (app) {
-  app.post('/signup', celebrate({
+  app.post('/api/signup', celebrate({
     body: Joi.object().keys({
       name: Joi.string().min(2).max(30).required(),
       email: Joi.string().email({ tlds: { allow: false } }).required(),
       password: Joi.string().required(),
     }),
   }), createUser);
-  app.post('/signin', celebrate({
+  app.post('/api/signin', celebrate({
     body: Joi.object().keys({
       email: Joi.string().email({ tlds: { allow: false } }).required(),
       password: Joi.string().required(),
     }),
   }), login);
 
-  app.use('/users', auth, routesUsers);
-  app.use('/charsheets', auth, routesCharsheets);
+  app.use('/api/users', auth, routesUsers);
+  app.use('/api/charsheets', auth, routesCharsheets);
 
   app.use(errorLogger);
   app.use(errors());

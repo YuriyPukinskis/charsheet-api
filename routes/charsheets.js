@@ -46,7 +46,8 @@ router.post('/', celebrate({
     disableDeviceLevel: Joi.number().empty('').default(0),
     craftLevel: Joi.number().empty('').default(0),
     bluffLevel: Joi.number().empty('').default(0),
-    acrobaticsLevel: Joi.number().empty('').default(0)
+    acrobaticsLevel: Joi.number().empty('').default(0),
+    game: Joi.string().empty('').default('')
   }),
 }), postCharsheet);
 
@@ -92,7 +93,8 @@ router.patch('/:charsheetId', celebrate({
     disableDeviceLevel: Joi.number().empty('').default(0),
     craftLevel: Joi.number().empty('').default(0),
     bluffLevel: Joi.number().empty('').default(0),
-    acrobaticsLevel: Joi.number().empty('').default(0)
+    acrobaticsLevel: Joi.number().empty('').default(0),
+    game: Joi.string().empty('').default('')
   }),
 }), patchCharsheet);
 

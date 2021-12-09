@@ -166,5 +166,9 @@ const charsheetSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  game: {
+    type: String,
+    default: '',
+  },
 });
 module.exports = mongoose.model('charsheet', charsheetSchema);
