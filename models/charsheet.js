@@ -170,5 +170,9 @@ const charsheetSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  notes: {
+    type: String,
+    default: '',
+  },
 });
 module.exports = mongoose.model('charsheet', charsheetSchema);
