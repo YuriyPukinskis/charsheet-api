@@ -56,6 +56,24 @@ module.exports.postCharsheet = (req, res, next) => {
     acrobaticsLevel,
     game,
     notes,
+    inventory,
+    weight,
+
+    armourName,
+    shieldName,
+    armourBonus,
+    shieldBonus,
+
+    armourType,
+    shieldType,
+    armourPenalty,
+    shieldPenalty,
+
+    armourSpellFail,
+    shieldSpellFail,
+
+    armourDex,
+    shieldDex,
   } = req.body;
   const owner = req.user._id;
   console.log(owner)
@@ -102,6 +120,23 @@ module.exports.postCharsheet = (req, res, next) => {
     acrobaticsLevel,
     game,
     notes,
+    inventory,
+    weight,
+
+    armourName,
+    shieldName,
+    armourBonus,
+    shieldBonus,
+
+    armourType,
+    shieldType,
+    armourPenalty,
+    shieldPenalty,
+
+    armourSpellFail,
+    shieldSpellFail,
+    armourDex,
+    shieldDex,
   })
     .then((charsheet) => {
       const newCharsheet = {
@@ -147,6 +182,22 @@ module.exports.postCharsheet = (req, res, next) => {
         acrobaticsLevel: charsheet.acrobaticsLevel,
         game: charsheet.game,
         notes: charsheet.notes,
+        inventory: charsheet.inventory,
+        weight: charsheet.weight,
+        armourName,
+        shieldName,
+        armourBonus,
+        shieldBonus,
+
+        armourType,
+        shieldType,
+        armourPenalty,
+        shieldPenalty,
+
+        armourSpellFail,
+        shieldSpellFail,
+        armourDex,
+        shieldDex,
       };
       res.send({ data: newCharsheet });
     })
@@ -190,6 +241,23 @@ module.exports.patchCharsheet = (req, res, next) => {/*req.user._id to req.body.
                               acrobaticsLevel: req.body.acrobaticsLevel,
                               game: req.body.game,
                               notes: req.body.notes,
+                              inventory: req.body.inventory,
+                              weight: req.body.weight,
+                              
+                              armourName: req.body.armourName,
+                              shieldName: req.body.shieldName,
+                              armourBonus: req.body.armourBonus,
+                              shieldBonus: req.body.shieldBonus,
+
+                              armourType: req.body.armourType,
+                              shieldType: req.body.shieldType,
+                              armourPenalty: req.body.armourPenalty,
+                              shieldPenalty: req.body.shieldPenalty,
+
+                              armourSpellFail: req.body.armourSpellFail,
+                              shieldSpellFail: req.body.shieldSpellFail,
+                              armourDex: req.body.armourDex,
+                              shieldDex: req.body.shieldDex,
                             },
     { new: true, runValidators: true })
     .orFail(new NotFoundError('Персонажа нет в базе'))

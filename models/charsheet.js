@@ -174,5 +174,65 @@ const charsheetSchema = new mongoose.Schema({
     type: String,
     default: '',
   },
+  inventory: {
+    type: String,
+    default: '',
+  },
+  weight: {
+    type: Number,
+    default: 0,
+  },
+
+  armourName: {
+    type: String,
+    default: '',
+  },
+  shieldName: {
+    type: String,
+    default: '',
+  },
+  armourBonus: {
+    type: Number,
+    default: 0,
+  },
+  shieldBonus: {
+    type: Number,
+    default: 0,
+  },
+
+  armourType: {
+    type: String,
+    default: '',
+  },
+  shieldType: {
+    type: String,
+    default: '',
+  },
+  armourPenalty: {
+    type: Number,
+    default: 0,
+  },
+  shieldPenalty: {
+    type: Number,
+    default: 0,
+  },
+
+  armourSpellFail: {
+    type: Number,
+    default: 0,
+  },
+  shieldSpellFail: {
+    type: Number,
+    default: 0,
+  },
+
+  armourDex: {
+    type: Number,
+    default: 0,
+  },
+  shieldDex: {
+    type: Number,
+    default: 0,
+  }
 });
 module.exports = mongoose.model('charsheet', charsheetSchema);

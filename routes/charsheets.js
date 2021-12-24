@@ -48,7 +48,8 @@ router.post('/', celebrate({
     bluffLevel: Joi.number().empty('').default(0),
     acrobaticsLevel: Joi.number().empty('').default(0),
     game: Joi.string().empty('').default(''),
-    notes: Joi.string().empty('').default('')
+    notes: Joi.string().empty('').default(''),
+    inventory: Joi.string().empty('').default('')
   }),
 }), postCharsheet);
 
@@ -96,7 +97,25 @@ router.patch('/:charsheetId', celebrate({
     bluffLevel: Joi.number().empty('').default(0),
     acrobaticsLevel: Joi.number().empty('').default(0),
     game: Joi.string().empty('').default(''),
-    notes: Joi.string().empty('').default('')
+    notes: Joi.string().empty('').default(''),
+    inventory: Joi.string().empty('').default(''),
+    weight: Joi.number().empty('').default(0),
+
+    armourName: Joi.string().empty('').default(''),
+    shieldName: Joi.string().empty('').default(''),
+    armourBonus: Joi.number().empty('').default(0),
+    shieldBonus: Joi.number().empty('').default(0),
+
+    armourType: Joi.string().empty('').default(''),
+    shieldType: Joi.string().empty('').default(''),
+    armourPenalty: Joi.number().empty('').default(0),
+    shieldPenalty: Joi.number().empty('').default(0),
+
+    armourSpellFail: Joi.number().empty('').default(0),
+    shieldSpellFail: Joi.number().empty('').default(0),
+
+    armourDex: Joi.number().empty('').default(0),
+    shieldDex: Joi.number().empty('').default(0),
   }),
 }), patchCharsheet);
 
